@@ -54,7 +54,9 @@ class SecondaryArticle extends StatelessWidget {
                 Text(
                   hours < 24
                       ? "Published $hours hours ago"
-                      : "Published $days days ago",
+                      : days == 1
+                          ? "Published $days day ago"
+                          : "Published $days days ago",
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: const Color(0xFFa0b0ba),
                         fontSize: 12,
