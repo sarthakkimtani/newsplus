@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
@@ -8,12 +7,14 @@ import '../widgets/drawer_list_tile.dart';
 class AppDrawer extends StatelessWidget {
   final userName = FirebaseAuth.instance.currentUser!.displayName;
 
+  AppDrawer({Key? key}) : super(key: key);
+
   String getInitials(String name) {
     List<String> names = name.split(" ");
     String initials = "";
     int numWords = 2;
 
-    if (numWords < names.length) {
+    if (numWords > names.length) {
       numWords = names.length;
     }
     for (var i = 0; i < numWords; i++) {

@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import "../../models/security.dart";
@@ -7,7 +6,7 @@ import "./securities_list_tile.dart";
 class SecuritiesList extends StatelessWidget {
   final List<Security> securitiesData;
 
-  const SecuritiesList(this.securitiesData);
+  const SecuritiesList(this.securitiesData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

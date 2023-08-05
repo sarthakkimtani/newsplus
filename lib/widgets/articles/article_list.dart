@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import "./primary_article.dart";
@@ -8,7 +7,7 @@ import "../../models/article.dart";
 class ArticleList extends StatelessWidget {
   final List<Article> articleData;
 
-  const ArticleList(this.articleData);
+  const ArticleList(this.articleData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

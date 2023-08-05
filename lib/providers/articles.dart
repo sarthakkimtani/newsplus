@@ -10,6 +10,11 @@ import "../models/article.dart";
 class Articles extends ChangeNotifier {
   final db = Localstore.instance;
 
+  final _url = Uri.parse(
+    "https://newsapi.org/v2/top-headlines?country=in&category=business",
+  );
+  final _headers = {"X-Api-Key": const String.fromEnvironment("NEWS_API")};
+
   List<Article> _items = [];
   List<Article> _savedItems = [];
 
@@ -26,12 +31,8 @@ class Articles extends ChangeNotifier {
   }
 
   Future<void> fetchArticles() async {
-    var url =
-        "https://newsapi.org/v2/top-headlines?country=in&category=business";
-
     try {
-      final response = await http.get(Uri.parse(url),
-          headers: {"X-Api-Key": const String.fromEnvironment("NEWS_API") });
+      final response = await http.get(_url, headers: _headers);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final articleData =
           List<Map<dynamic, dynamic>>.from(extractedData['articles']);
@@ -88,17 +89,8 @@ class Articles extends ChangeNotifier {
     final data = await db.collection("$_userId/articles").get();
     final List<dynamic> extractedData =
         data!.entries.map((entry) => entry.value).toList();
-    final List<Article> articleList = extractedData
-        .map(
-          (article) => Article(
-            id: article['id'] as String,
-            title: article['title'] as String,
-            url: article['url'] as String,
-            imageUrl: article['imageUrl'] as String,
-            publishedAt: DateTime.parse(article['publishedAt'] as String),
-          ),
-        )
-        .toList();
+    final List<Article> articleList =
+        extractedData.map((article) => Article.fromMap(article)).toList();
     _savedItems = articleList;
     notifyListeners();
   }

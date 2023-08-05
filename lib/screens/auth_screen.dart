@@ -1,10 +1,11 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import "../widgets/auth/auth_buttons.dart";
 
 class AuthScreen extends StatelessWidget {
   static const routeName = "/auth";
+
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,10 @@ class AuthScreen extends StatelessWidget {
                 Text(
                   "Business & Financial News",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 24),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: 15),
                 Text(
@@ -41,7 +45,7 @@ class AuthScreen extends StatelessWidget {
               ],
             ),
           ),
-          AuthButtons(),
+          const AuthButtons(),
         ],
       ),
     );

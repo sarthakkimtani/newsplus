@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
@@ -8,6 +7,8 @@ import "../../widgets/shimmer/markets_shimmer.dart";
 import "../../widgets/securities/securities_list.dart";
 
 class MarketsScreen extends StatefulWidget {
+  const MarketsScreen({Key? key}) : super(key: key);
+
   @override
   State<MarketsScreen> createState() => _MarketsScreenState();
 }
@@ -34,7 +35,7 @@ class _MarketsScreenState extends State<MarketsScreen> {
       future: _securitiesFuture,
       builder: (ctx, snapshot) => snapshot.connectionState ==
               ConnectionState.waiting
-          ? MarketsShimmer()
+          ? const MarketsShimmer()
           : snapshot.hasError
               ? const ImageBanner(
                   imgSrc: "assets/images/error.png",

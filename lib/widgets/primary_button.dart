@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 class PrimaryButton extends StatelessWidget {
@@ -6,8 +5,12 @@ class PrimaryButton extends StatelessWidget {
   final double width;
   final VoidCallback onTap;
 
-  const PrimaryButton(
-      {required this.widget, required this.width, required this.onTap});
+  const PrimaryButton({
+    Key? key,
+    required this.widget,
+    required this.width,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

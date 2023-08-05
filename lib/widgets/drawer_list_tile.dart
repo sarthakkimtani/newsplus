@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors, use_build_context_synchronously
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
@@ -9,11 +8,12 @@ class DrawerListTile extends StatelessWidget {
   final bool isLogout;
 
   const DrawerListTile({
+    Key? key,
     required this.name,
     required this.icon,
     required this.routeName,
     this.isLogout = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,14 @@ class DrawerListTile extends StatelessWidget {
         }
         if (isLogout) {
           await FirebaseAuth.instance.signOut();
-          if (Navigator.canPop(context)) {
+          if (context.mounted) {
             Navigator.of(context).pop();
           }
         }
-        Navigator.of(context, rootNavigator: true).pushReplacementNamed(routeName);
+        if (context.mounted) {
+          Navigator.of(context, rootNavigator: true)
+              .pushReplacementNamed(routeName);
+        }
       },
       selected: isSelected,
       selectedTileColor: const Color(0xFF353B46),

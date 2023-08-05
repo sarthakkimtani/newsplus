@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import "../widgets/app_drawer.dart";
@@ -7,6 +6,9 @@ import "../widgets/settings/settings_list.dart";
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = "/settings";
+
+  const SettingsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

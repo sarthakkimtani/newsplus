@@ -24,7 +24,7 @@ class SettingsList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => ChangePassword(),
+                  builder: (ctx) => const ChangePassword(),
                 ),
               );
             },

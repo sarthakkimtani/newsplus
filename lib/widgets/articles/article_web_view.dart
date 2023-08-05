@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import "package:url_launcher/url_launcher.dart" as launcher;
@@ -11,7 +10,7 @@ class ArticleWebView extends StatefulWidget {
   final String id;
   final String articleUrl;
 
-  const ArticleWebView(this.id, this.articleUrl);
+  const ArticleWebView(this.id, this.articleUrl, {Key? key}) : super(key: key);
 
   @override
   State<ArticleWebView> createState() => _ArticleWebViewState();

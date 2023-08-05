@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "newsplus",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": ["--dart-define-from-file","api_keys.json"],
+        },
+        {
+            "name": "newsplus (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": ["--dart-define-from-file","api_keys.json"],
+        },
+        {
+            "name": "newsplus (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": ["--dart-define-from-file","api_keys.json"],
+        }
+    ]
+}

@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import "./auth_form.dart";
@@ -6,6 +5,8 @@ import "../primary_button.dart";
 import "../secondary_button.dart";
 
 class AuthButtons extends StatefulWidget {
+  const AuthButtons({Key? key}) : super(key: key);
+
   @override
   State<AuthButtons> createState() => _AuthButtonsState();
 }

@@ -10,6 +10,10 @@ import '../models/security.dart';
 class Securities extends ChangeNotifier {
   final db = Localstore.instance;
 
+  final _url = Uri.parse(
+    "https://yh-finance.p.rapidapi.com/market/get-trending-tickers",
+  );
+
   final _headers = {
     "X-RapidAPI-Host": "yh-finance.p.rapidapi.com",
     "X-RapidAPI-Key": const String.fromEnvironment("STOCK_API")
@@ -31,10 +35,8 @@ class Securities extends ChangeNotifier {
   }
 
   Future<void> fetchSecurities() async {
-    var url = "https://yh-finance.p.rapidapi.com/market/get-trending-tickers";
-
     try {
-      final response = await http.get(Uri.parse(url), headers: _headers);
+      final response = await http.get(_url, headers: _headers);
       final extractedData = json.decode(response.body)['finance']['result'][0];
       final assetData =
           List<Map<dynamic, dynamic>>.from(extractedData['quotes']);
@@ -98,21 +100,10 @@ class Securities extends ChangeNotifier {
   Future<void> fetchSavedSecurities() async {
     final data = await db.collection("$_userId/tickers").get();
     final List<dynamic> extractedData =
-        data!.entries.map((entry) => entry.value).toList();
+        data?.entries.map((entry) => entry.value).toList() ?? [];
 
     final List<Security> securityList = extractedData
-        .map(
-          (security) => Security(
-            id: security['ticker'] as String,
-            name: security['name'] as String,
-            ticker: security['ticker'] as String,
-            type: security['type'] as String,
-            exchange: security['exchange'] as String,
-            price: security['price'] as double,
-            dayChange: security['dayChange'] as double,
-            dayChangePercent: security['dayChangePercent'] as double,
-          ),
-        )
+        .map((security) => Security.fromMap(security as Map<String, dynamic>))
         .toList();
     _savedItems = securityList;
     notifyListeners();
