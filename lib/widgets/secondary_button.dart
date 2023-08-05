@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 class SecondaryButton extends StatelessWidget {
@@ -6,8 +5,12 @@ class SecondaryButton extends StatelessWidget {
   final double width;
   final VoidCallback onTap;
 
-  const SecondaryButton(
-      {required this.text, required this.width, required this.onTap});
+  const SecondaryButton({
+    Key? key,
+    required this.text,
+    required this.width,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

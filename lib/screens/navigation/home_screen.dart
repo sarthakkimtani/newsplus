@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import 'package:newsplus/widgets/image_banner.dart';
 import "package:provider/provider.dart";
@@ -8,6 +7,8 @@ import '../../widgets/articles/article_list.dart';
 import '../../widgets/shimmer/news_shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _articleFuture,
       builder: (ctx, snapshot) => snapshot.connectionState ==
               ConnectionState.waiting
-          ? NewsShimmer()
+          ? const NewsShimmer()
           : snapshot.hasError
               ? const ImageBanner(
                   imgSrc: "assets/images/error.png",

@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 class PasswordInputField extends StatefulWidget {
@@ -7,10 +6,11 @@ class PasswordInputField extends StatefulWidget {
   final String? Function(String?) validator;
 
   const PasswordInputField({
+    Key? key,
     required this.text,
     required this.onSaved,
     required this.validator,
-  });
+  }) : super(key: key);
 
   @override
   State<PasswordInputField> createState() => _PasswordInputFieldState();

@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 
 import './home_screen.dart';
@@ -10,6 +9,9 @@ import '../../configs/custom_icons.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = "/tabs";
+
+  const TabsScreen({Key? key}) : super(key: key);
+
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
@@ -20,10 +22,10 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     _pages = [
-      {"page": HomeScreen(), "title": "News+"},
-      {"page": MarketsScreen(), "title": "Markets"},
-      {"page": WatchlistScreen(), "title": "Watchlist"},
-      {"page": SavedScreen(), "title": "Saved"},
+      {"page": const HomeScreen(), "title": "News+"},
+      {"page": const MarketsScreen(), "title": "Markets"},
+      {"page": const WatchlistScreen(), "title": "Watchlist"},
+      {"page": const SavedScreen(), "title": "Saved"},
     ];
     super.initState();
   }
@@ -53,8 +55,8 @@ class _TabsScreenState extends State<TabsScreen> {
         onTap: _selectPage,
         enableFeedback: false,
         showUnselectedLabels: true,
-        unselectedLabelStyle: const TextStyle(fontFamily: "Montserrat"),
-        selectedLabelStyle: const TextStyle(fontFamily: "Montserrat"),
+        unselectedLabelStyle: const TextStyle(fontFamily: "Poppins"),
+        selectedLabelStyle: const TextStyle(fontFamily: "Poppins"),
         unselectedItemColor: const Color(0xFFa0b0ba),
         selectedItemColor: Theme.of(context).primaryColor,
         currentIndex: _selectedIndex,

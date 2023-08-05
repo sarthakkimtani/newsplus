@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 
@@ -8,13 +7,15 @@ import '../../widgets/articles/secondary_article.dart';
 import '../../widgets/image_banner.dart';
 
 class SavedScreen extends StatefulWidget {
+  const SavedScreen({Key? key}) : super(key: key);
+
   @override
   State<SavedScreen> createState() => _SavedScreenState();
 }
 
 class _SavedScreenState extends State<SavedScreen> {
   late Future<void> _articleFuture;
-  
+
   @override
   void initState() {
     _articleFuture =

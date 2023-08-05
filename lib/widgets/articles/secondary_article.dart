@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 
@@ -8,7 +7,7 @@ import '../../models/article.dart';
 class SecondaryArticle extends StatelessWidget {
   final Article article;
 
-  const SecondaryArticle(this.article);
+  const SecondaryArticle(this.article, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

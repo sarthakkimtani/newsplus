@@ -1,8 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:shimmer/shimmer.dart";
 
 class NewsShimmer extends StatelessWidget {
+  const NewsShimmer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(

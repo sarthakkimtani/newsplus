@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
@@ -9,6 +8,8 @@ import "../../widgets/image_banner.dart";
 import "../../widgets/securities/securities_list_tile.dart";
 
 class WatchlistScreen extends StatefulWidget {
+  const WatchlistScreen({Key? key}) : super(key: key);
+
   @override
   State<WatchlistScreen> createState() => _WatchlistScreenState();
 }

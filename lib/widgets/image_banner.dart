@@ -1,11 +1,14 @@
-// ignore_for_file: use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 
 class ImageBanner extends StatelessWidget {
   final String imgSrc;
   final String text;
 
-  const ImageBanner({required this.imgSrc, required this.text});
+  const ImageBanner({
+    Key? key,
+    required this.imgSrc,
+    required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

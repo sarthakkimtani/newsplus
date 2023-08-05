@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
@@ -7,6 +6,8 @@ import "../primary_button.dart";
 import "../small_loading_spinner.dart";
 
 class ChangePassword extends StatefulWidget {
+  const ChangePassword({Key? key}) : super(key: key);
+
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
 }
@@ -146,7 +147,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   const SizedBox(height: 30),
                   PrimaryButton(
                     widget: _isLoading
-                        ? SmallLoadingSpinner()
+                        ? const SmallLoadingSpinner()
                         : const Text("Change Password"),
                     width: double.infinity - 20,
                     onTap: _submit,

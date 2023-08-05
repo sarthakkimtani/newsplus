@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
@@ -10,7 +9,7 @@ enum AuthMode { login, signUp }
 
 class AuthForm extends StatefulWidget {
   final AuthMode mode;
-  const AuthForm(this.mode);
+  const AuthForm(this.mode, {Key? key}) : super(key: key);
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -160,7 +159,9 @@ class _AuthFormState extends State<AuthForm> {
                     ),
                     const SizedBox(height: 30),
                     PrimaryButton(
-                      widget: _isLoading ? SmallLoadingSpinner() : buttonChild,
+                      widget: _isLoading
+                          ? const SmallLoadingSpinner()
+                          : buttonChild,
                       width: mediaQuery.size.width * 0.5,
                       onTap: _submit,
                     )
@@ -184,13 +185,14 @@ class InputField extends StatelessWidget {
   final String? Function(String?) validator;
 
   const InputField({
+    Key? key,
     required this.text,
     required this.validator,
     required this.onSaved,
     this.textCaps = false,
     this.isEmail = false,
     this.isPassword = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

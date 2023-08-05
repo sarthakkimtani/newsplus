@@ -1,4 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:provider/provider.dart";
@@ -20,6 +19,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final ThemeData theme = ThemeData();
+
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,16 +88,16 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, authSnapshot) {
             if (authSnapshot.hasData) {
-              return TabsScreen();
+              return const TabsScreen();
             } else {
-              return AuthScreen();
+              return const AuthScreen();
             }
           },
         ),
         routes: {
-          AuthScreen.routeName: (_) => AuthScreen(),
-          TabsScreen.routeName: (_) => TabsScreen(),
-          SettingsScreen.routeName: (_) => SettingsScreen(),
+          AuthScreen.routeName: (_) => const AuthScreen(),
+          TabsScreen.routeName: (_) => const TabsScreen(),
+          SettingsScreen.routeName: (_) => const SettingsScreen(),
         },
       ),
     );

@@ -1,8 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:shimmer/shimmer.dart";
 
 class MarketsShimmer extends StatelessWidget {
+  const MarketsShimmer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,10 +25,10 @@ class MarketsShimmer extends StatelessWidget {
             const SizedBox(height: 30),
             Expanded(
               child: ListView.builder(
-                itemBuilder: (ctx, i) => Column(
+                itemBuilder: (ctx, i) => const Column(
                   children: [
                     ListShimmer(),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20),
                   ],
                 ),
                 itemCount: 4,
@@ -41,6 +42,8 @@ class MarketsShimmer extends StatelessWidget {
 }
 
 class ListShimmer extends StatelessWidget {
+  const ListShimmer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
