@@ -10,6 +10,7 @@
 .svn/
 api_keys.json
 android/key.properties
+*.keystore
 
 # IntelliJ related
 *.iml
