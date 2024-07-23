@@ -1,6 +1,9 @@
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
+import "../services/notification_service.dart";
+import "../widgets/logout_alert_dialog.dart";
+
 class DrawerListTile extends StatelessWidget {
   final String name;
   final Icon icon;
@@ -26,6 +29,11 @@ class DrawerListTile extends StatelessWidget {
           return;
         }
         if (isLogout) {
+          showDialog(
+            context: context,
+            builder: (ctx) => const LogoutAlertDialog(),
+          );
+          await NotificationService.unsubscribeToNotifications();
           await FirebaseAuth.instance.signOut();
           if (context.mounted) {
             Navigator.of(context).pop();

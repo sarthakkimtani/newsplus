@@ -30,7 +30,7 @@
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
 ///
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, prefer_double_quotes
 import 'package:flutter/widgets.dart';
 
 class CustomIcons {

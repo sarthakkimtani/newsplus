@@ -51,6 +51,10 @@ class SecuritiesSearch extends SearchDelegate {
       itemBuilder: ((context, i) => ListTile(
             title: Text(results[i].ticker),
             subtitle: Text(results[i].name),
+            trailing: Text(
+              results[i].price.toString(),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           )),
     );
   }
@@ -65,6 +69,10 @@ class SecuritiesSearch extends SearchDelegate {
       itemBuilder: ((context, i) => ListTile(
             title: Text(results[i].ticker),
             subtitle: Text(results[i].name),
+            trailing: Text(
+              results[i].price.toString(),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           )),
     );
   }

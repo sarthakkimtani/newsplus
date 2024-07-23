@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class Article {
   final String id;
@@ -17,21 +17,21 @@ class Article {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'url': url,
-      'imageUrl': imageUrl,
-      'publishedAt': publishedAt.toString(),
+      "id": id,
+      "title": title,
+      "url": url,
+      "imageUrl": imageUrl,
+      "publishedAt": publishedAt.toString(),
     };
   }
 
   factory Article.fromMap(Map<String, dynamic> map) {
     return Article(
-      id: map['id'] as String,
-      title: map['title'] as String,
-      url: map['url'] as String,
-      imageUrl: map['imageUrl'] as String,
-      publishedAt: DateTime.parse(map['publishedAt'] as String),
+      id: map["id"] as String,
+      title: map["title"] as String,
+      url: map["url"] as String,
+      imageUrl: map["imageUrl"] as String,
+      publishedAt: DateTime.parse(map["publishedAt"] as String),
     );
   }
 

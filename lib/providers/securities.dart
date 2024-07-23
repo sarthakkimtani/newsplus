@@ -1,11 +1,11 @@
-import 'dart:convert';
+import "dart:convert";
 
 import "package:flutter/foundation.dart";
 import "package:localstore/localstore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:http/http.dart" as http;
 
-import '../models/security.dart';
+import "../models/security.dart";
 
 class Securities extends ChangeNotifier {
   final db = Localstore.instance;
@@ -35,32 +35,27 @@ class Securities extends ChangeNotifier {
   }
 
   Future<void> fetchSecurities() async {
-    try {
-      final response = await http.get(_url, headers: _headers);
-      final extractedData = json.decode(response.body)['finance']['result'][0];
-      final assetData =
-          List<Map<dynamic, dynamic>>.from(extractedData['quotes']);
+    final response = await http.get(_url, headers: _headers);
+    final extractedData = json.decode(response.body)["finance"]["result"][0];
+    final assetData = List<Map<dynamic, dynamic>>.from(extractedData["quotes"]);
 
-      final List<Security> assetList = assetData
-          .map((asset) => Security(
-                id: asset['symbol'],
-                name: asset['shortName'],
-                ticker: asset['symbol'],
-                type: asset['quoteType'],
-                exchange: asset['fullExchangeName'],
-                price: asset['regularMarketPrice'],
-                dayChange: asset['regularMarketChange'],
-                dayChangePercent: asset['regularMarketChangePercent'],
-              ))
-          .toList();
+    final List<Security> assetList = assetData
+        .map((asset) => Security(
+              id: asset["symbol"],
+              name: asset["shortName"],
+              ticker: asset["symbol"],
+              type: asset["quoteType"],
+              exchange: asset["fullExchangeName"],
+              price: asset["regularMarketPrice"],
+              dayChange: asset["regularMarketChange"],
+              dayChangePercent: asset["regularMarketChangePercent"],
+            ))
+        .toList();
 
-      _items = assetList
-          .where((asset) => asset.type == "EQUITY" || asset.type == "INDEX")
-          .toList();
-      notifyListeners();
-    } catch (error) {
-      rethrow;
-    }
+    _items = assetList
+        .where((asset) => asset.type == "EQUITY" || asset.type == "INDEX")
+        .toList();
+    notifyListeners();
   }
 
   bool containsSaved(String ticker) {

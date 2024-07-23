@@ -9,9 +9,9 @@ class SmallLoadingSpinner extends StatelessWidget {
       width: 25,
       height: 25,
       child: Center(
-        child: CircularProgressIndicator(
+        child: CircularProgressIndicator.adaptive(
           strokeWidth: 2,
-          color: Colors.white,
+          backgroundColor: Colors.white,
         ),
       ),
     );

@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
-import '../configs/custom_icons.dart';
-import '../widgets/drawer_list_tile.dart';
+import "../configs/custom_icons.dart";
+import "../widgets/drawer_list_tile.dart";
 
 class AppDrawer extends StatelessWidget {
-  final userName = FirebaseAuth.instance.currentUser!.displayName;
+  final userName = FirebaseAuth.instance.currentUser?.displayName ?? "";
 
   AppDrawer({Key? key}) : super(key: key);
 
@@ -14,6 +14,9 @@ class AppDrawer extends StatelessWidget {
     String initials = "";
     int numWords = 2;
 
+    if (name.isEmpty) {
+      return initials;
+    }
     if (numWords > names.length) {
       numWords = names.length;
     }
@@ -42,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                   backgroundColor: Colors.white,
                   radius: 30,
                   child: Text(
-                    getInitials(userName!),
+                    getInitials(userName),
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontFamily: "Montserrat",
@@ -55,7 +58,7 @@ class AppDrawer extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  userName as String,
+                  userName,
                   style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,

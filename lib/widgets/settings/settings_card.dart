@@ -1,9 +1,10 @@
-// ignore_for_file: use_key_in_widget_constructors
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 
 class SettingsCard extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser;
+
+  SettingsCard({Key? key}) : super(key: key);
 
   String getInitials(String name) {
     List<String> names = name.split(" ");
@@ -42,6 +43,7 @@ class SettingsCard extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   user!.email as String,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge,
                 )
               ],

@@ -4,6 +4,8 @@ import "package:firebase_auth/firebase_auth.dart";
 import "../../configs/custom_icons.dart";
 import "../small_loading_spinner.dart";
 import "../primary_button.dart";
+import "../input_field.dart";
+import "../../utils/regex_patterns.dart";
 
 enum AuthMode { login, signUp }
 
@@ -18,10 +20,18 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final RegExp emailRegex = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-  final _formValues = {'name': '', 'email': '', 'password': ''};
+  final _formValues = {"name": "", "email": "", "password": ""};
   var _isLoading = false;
+
+  void showSnackbar({String message = "Something went wrong!"}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Theme.of(context).colorScheme.error,
+        content: Text(message),
+      ),
+    );
+  }
 
   void _submit() async {
     if (!_formKey.currentState!.validate()) {
@@ -36,17 +46,17 @@ class _AuthFormState extends State<AuthForm> {
       });
       if (widget.mode == AuthMode.login) {
         await _auth.signInWithEmailAndPassword(
-          email: _formValues['email'] as String,
-          password: _formValues['password'] as String,
+          email: _formValues["email"] as String,
+          password: _formValues["password"] as String,
         );
       } else {
         await _auth
             .createUserWithEmailAndPassword(
-              email: _formValues['email'] as String,
-              password: _formValues['password'] as String,
+              email: _formValues["email"] as String,
+              password: _formValues["password"] as String,
             )
             .then((result) =>
-                result.user!.updateDisplayName(_formValues['name']));
+                result.user!.updateDisplayName(_formValues["name"]));
       }
       if (context.mounted) {
         Navigator.of(context).pop();
@@ -57,29 +67,15 @@ class _AuthFormState extends State<AuthForm> {
       if (error.message != null) {
         message = error.message as String;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Theme.of(context).colorScheme.error,
-          content: Text(message),
-        ),
-      );
-      setState(() {
-        _isLoading = false;
-      });
+      showSnackbar(message: message);
       Navigator.of(context).pop();
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Theme.of(context).colorScheme.error,
-          content: const Text("Something went wrong!"),
-        ),
-      );
-      setState(() {
-        _isLoading = false;
-      });
+      showSnackbar();
       Navigator.of(context).pop();
+    } finally {
+      setState(() {
+        _isLoading = true;
+      });
     }
   }
 
@@ -92,7 +88,7 @@ class _AuthFormState extends State<AuthForm> {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(
-          bottom: mediaQuery.viewInsets.bottom,
+          bottom: mediaQuery.viewInsets.bottom + 10,
         ),
         margin: const EdgeInsets.all(20),
         child: Form(
@@ -126,7 +122,7 @@ class _AuthFormState extends State<AuthForm> {
                           return null;
                         },
                         onSaved: (value) {
-                          _formValues['name'] = value!;
+                          _formValues["name"] = value!;
                         },
                       ),
                     if (!isLogin) const SizedBox(height: 25),
@@ -140,7 +136,7 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       },
                       onSaved: (value) {
-                        _formValues['email'] = value!;
+                        _formValues["email"] = value!;
                       },
                     ),
                     const SizedBox(height: 25),
@@ -154,7 +150,7 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       },
                       onSaved: (value) {
-                        _formValues['password'] = value!;
+                        _formValues["password"] = value!;
                       },
                     ),
                     const SizedBox(height: 30),
@@ -170,52 +166,6 @@ class _AuthFormState extends State<AuthForm> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class InputField extends StatelessWidget {
-  final String text;
-  final bool textCaps;
-  final bool isPassword;
-  final bool isEmail;
-  final void Function(String?) onSaved;
-  final String? Function(String?) validator;
-
-  const InputField({
-    Key? key,
-    required this.text,
-    required this.validator,
-    required this.onSaved,
-    this.textCaps = false,
-    this.isEmail = false,
-    this.isPassword = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      textInputAction: isPassword ? TextInputAction.done : TextInputAction.next,
-      cursorColor: Theme.of(context).primaryColor,
-      obscureText: isPassword,
-      keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
-      validator: validator,
-      onSaved: onSaved,
-      textCapitalization:
-          textCaps ? TextCapitalization.words : TextCapitalization.none,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(10),
-        labelStyle: Theme.of(context).textTheme.bodyMedium,
-        labelText: text,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFFa39b9b),
-          ),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 1.5),
         ),
       ),
     );

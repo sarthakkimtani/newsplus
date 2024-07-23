@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:provider/provider.dart';
+import "package:provider/provider.dart";
 import "package:url_launcher/url_launcher.dart" as launcher;
 import "package:webview_flutter/webview_flutter.dart";
 
-import '../../configs/custom_icons.dart';
-import '../../providers/articles.dart';
+import "../../configs/custom_icons.dart";
+import "../../providers/articles.dart";
 
 class ArticleWebView extends StatefulWidget {
   final String id;
@@ -91,7 +91,12 @@ class _ArticleWebViewState extends State<ArticleWebView> {
                     ),
                   ),
                   onPressed: () => _launchURL(widget.articleUrl),
-                  child: const Text("Open in Browser"),
+                  child: const Text(
+                    "Open in Browser",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 IconButton(
                   onPressed: () => _toggleSave(widget.id),

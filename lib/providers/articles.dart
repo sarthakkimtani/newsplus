@@ -31,27 +31,23 @@ class Articles extends ChangeNotifier {
   }
 
   Future<void> fetchArticles() async {
-    try {
-      final response = await http.get(_url, headers: _headers);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final articleData =
-          List<Map<dynamic, dynamic>>.from(extractedData['articles']);
-      final loadedArticles = articleData
-          .map(
-            (data) => Article(
-              id: data['publishedAt'] ?? "",
-              title: data['title'] ?? "",
-              url: data['url'] ?? "",
-              imageUrl: data['urlToImage'] ?? "",
-              publishedAt: DateTime.parse(data['publishedAt']),
-            ),
-          )
-          .toList();
-      _items = loadedArticles;
-      notifyListeners();
-    } catch (error) {
-      rethrow;
-    }
+    final response = await http.get(_url, headers: _headers);
+    final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    final articleData =
+        List<Map<dynamic, dynamic>>.from(extractedData["articles"]);
+    final loadedArticles = articleData
+        .map(
+          (data) => Article(
+            id: data["publishedAt"] ?? "",
+            title: data["title"] ?? "",
+            url: data["url"] ?? "",
+            imageUrl: data["urlToImage"] ?? "",
+            publishedAt: DateTime.parse(data["publishedAt"]),
+          ),
+        )
+        .toList();
+    _items = loadedArticles;
+    notifyListeners();
   }
 
   Article findById(String id) {

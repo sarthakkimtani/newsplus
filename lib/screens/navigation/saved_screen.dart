@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:provider/provider.dart';
+import "package:provider/provider.dart";
 
-import '../../providers/articles.dart';
-import '../../models/article.dart';
-import '../../widgets/articles/secondary_article.dart';
-import '../../widgets/image_banner.dart';
+import "../../providers/articles.dart";
+import "../../models/article.dart";
+import "../../widgets/articles/secondary_article.dart";
+import "../../widgets/image_banner.dart";
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({Key? key}) : super(key: key);

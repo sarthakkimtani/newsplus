@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:cached_network_image/cached_network_image.dart";
 
-import './article_web_view.dart';
-import '../../models/article.dart';
+import "./article_web_view.dart";
+import "../../models/article.dart";
 
 class PrimaryArticle extends StatelessWidget {
   final Article article;
@@ -30,14 +30,18 @@ class PrimaryArticle extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: SizedBox(
-                  width: double.infinity,
-                  height: 200,
-                  child: CachedNetworkImage(
-                    fadeOutDuration: const Duration(milliseconds: 100),
-                    errorWidget: (ctx, url, error) => const Icon(Icons.error),
-                    imageUrl: article.imageUrl,
-                    fit: BoxFit.cover,
-                  )),
+                width: double.infinity,
+                height: 200,
+                child: article.imageUrl.isEmpty
+                    ? const Icon(Icons.error, size: 30)
+                    : CachedNetworkImage(
+                        fadeOutDuration: const Duration(milliseconds: 100),
+                        errorWidget: (ctx, url, error) =>
+                            const Icon(Icons.error),
+                        imageUrl: article.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+              ),
             ),
             const SizedBox(height: 15),
             Text(

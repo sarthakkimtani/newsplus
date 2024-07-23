@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/material.dart";
 
 import "./article_web_view.dart";
-import '../../models/article.dart';
+import "../../models/article.dart";
 
 class SecondaryArticle extends StatelessWidget {
   final Article article;
@@ -68,12 +68,15 @@ class SecondaryArticle extends StatelessWidget {
               child: SizedBox(
                 width: 90,
                 height: 90,
-                child: CachedNetworkImage(
-                  fadeInDuration: const Duration(milliseconds: 100),
-                  errorWidget: (ctx, url, error) => const Icon(Icons.error),
-                  imageUrl: article.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: article.imageUrl.isEmpty
+                    ? const Icon(Icons.error, size: 18)
+                    : CachedNetworkImage(
+                        fadeOutDuration: const Duration(milliseconds: 100),
+                        errorWidget: (ctx, url, error) =>
+                            const Icon(Icons.error),
+                        imageUrl: article.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ],
