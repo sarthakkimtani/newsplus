@@ -21,22 +21,13 @@ dependencies:
   webview_flutter: ^4.0.7
   cached_network_image: ^3.2.0
   overlay_support: ^2.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.0
-
-flutter_launcher_icons:
-  ios: true
-  image_path_ios: assets/images/logo-ios.png
-  android: "launcher_icon"
-  min_sdk_android: 20
-  image_path: assets/images/logo.png
-  adaptive_icon_foreground: assets/images/logo.png
-  adaptive_icon_background: "#000000"
 
 flutter_native_splash:
   android: true

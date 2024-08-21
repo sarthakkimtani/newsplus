@@ -36,7 +36,9 @@ class _TabsScreenState extends State<TabsScreen> {
       {"page": const SavedScreen(), "title": "Saved"},
     ];
 
-    NotificationService.initializeService(context);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => NotificationService.initializeService(context),
+    );
   }
 
   @override

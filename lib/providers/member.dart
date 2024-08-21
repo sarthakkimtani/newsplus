@@ -48,7 +48,9 @@ class Member extends ChangeNotifier {
     final memberData = List<Map<dynamic, dynamic>>.from(extractedData["data"]);
 
     _isMember = memberData.isNotEmpty;
-    await NotificationService.subscribeToNotifications();
+    if (_isMember) {
+      await NotificationService.subscribeToNotifications();
+    }
     notifyListeners();
   }
 
@@ -65,7 +67,9 @@ class Member extends ChangeNotifier {
         "email": userEmail,
       });
       _isMember = memberData.isNotEmpty;
-      await NotificationService.subscribeToNotifications();
+      if (_isMember) {
+        await NotificationService.subscribeToNotifications();
+      }
       notifyListeners();
     }
   }

@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import "package:newsplus/widgets/image_banner.dart";
 import "package:provider/provider.dart";
 
 import "../../providers/articles.dart";
 import "../../widgets/articles/article_list.dart";
+import "../../widgets/image_banner.dart";
 import "../../widgets/shimmer/news_shimmer.dart";
 
 class HomeScreen extends StatefulWidget {

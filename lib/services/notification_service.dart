@@ -13,6 +13,18 @@ class NotificationService {
   static final _messaging = FirebaseMessaging.instance;
   static final _db = Localstore.instance;
 
+  static Future<void> _saveTrade(RemoteMessage message) async {
+    await _db.collection("$_userId/trades").doc(message.messageId).set({
+      "title": message.notification?.title,
+      "body": message.notification?.body,
+      "ticker": message.data["ticker"],
+      "position": message.data["position"],
+      "entryPrice": double.tryParse(message.data["entryPrice"]) ?? 0.0,
+      "stopLoss": double.tryParse(message.data["stopLoss"]) ?? 0.0,
+      "takeProfit": double.tryParse(message.data["takeProfit"]) ?? 0.0,
+    });
+  }
+
   static Future<void> initializeService(BuildContext context) async {
     NotificationSettings settings = await _messaging.requestPermission();
     await _messaging.setForegroundNotificationPresentationOptions(
@@ -31,10 +43,7 @@ class NotificationService {
           background: Theme.of(context).colorScheme.primary,
           foreground: Theme.of(context).colorScheme.secondary,
         );
-        await _db.collection("$_userId/trades").doc(message.messageId).set({
-          "title": message.notification?.title,
-          "body": message.notification?.body,
-        });
+        await _saveTrade(message);
         await Provider.of<Member>(context, listen: false).fetchTrades();
       });
 
@@ -47,10 +56,7 @@ class NotificationService {
 
   static Future<void> backgroundMessageHandler(RemoteMessage message) async {
     await Firebase.initializeApp();
-    await _db.collection("$_userId/trades").doc(message.messageId).set({
-      "title": message.notification?.title,
-      "body": message.notification?.body,
-    });
+    await _saveTrade(message);
   }
 
   static Future<void> subscribeToNotifications() async {
