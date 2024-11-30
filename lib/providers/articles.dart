@@ -1,6 +1,7 @@
 import "dart:convert";
 
 import "package:flutter/foundation.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:localstore/localstore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:http/http.dart" as http;
@@ -11,9 +12,9 @@ class Articles extends ChangeNotifier {
   final db = Localstore.instance;
 
   final _url = Uri.parse(
-    "https://newsapi.org/v2/top-headlines?country=in&category=business",
+    "https://newsapi.org/v2/top-headlines?category=business",
   );
-  final _headers = {"X-Api-Key": const String.fromEnvironment("NEWS_API")};
+  final _headers = {"X-Api-Key": dotenv.get("NEWS_API_KEY")};
 
   List<Article> _items = [];
   List<Article> _savedItems = [];
@@ -35,7 +36,7 @@ class Articles extends ChangeNotifier {
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     final articleData =
         List<Map<dynamic, dynamic>>.from(extractedData["articles"]);
-    final loadedArticles = articleData
+    List<Article> loadedArticles = articleData
         .map(
           (data) => Article(
             id: data["publishedAt"] ?? "",
@@ -46,6 +47,7 @@ class Articles extends ChangeNotifier {
           ),
         )
         .toList();
+
     _items = loadedArticles;
     notifyListeners();
   }

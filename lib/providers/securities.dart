@@ -1,6 +1,7 @@
 import "dart:convert";
 
 import "package:flutter/foundation.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:localstore/localstore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:http/http.dart" as http;
@@ -16,7 +17,7 @@ class Securities extends ChangeNotifier {
 
   final _headers = {
     "X-RapidAPI-Host": "yh-finance.p.rapidapi.com",
-    "X-RapidAPI-Key": const String.fromEnvironment("STOCK_API")
+    "X-RapidAPI-Key": dotenv.get("STOCK_API_KEY")
   };
 
   List<Security> _items = [];

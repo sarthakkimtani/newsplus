@@ -44,25 +44,23 @@ To run the app locally and make modifications, follow these steps:
     ```bash
     flutter pub get
     ```
-5.  Create a new JSON file named `api_keys.json` & add your API Keys using:<br>
+5.  Create a new `.env` file & add your API Keys using:<br>
 
-    ```json
-    {
-      "NEWS_API": "<API_KEY>",
-      "STOCK_API": "<API_KEY>"
-    }
+    ```bash
+    NEWS_API_KEY=<...>
+    STOCK_API_KEY=<...>
     ```
 
     API Keys for News API can be found at [newsapi.org](https://newsapi.org/)<br>
     API Keys for Stock API can be found at [RapidAPI](https://rapidapi.com/apidojo/api/yh-finance)
 
 6.  Register your app with Firebase and download the configuration files:
-    - For Android, add `google-services.json` to your project's `app/` directory.
-    - For iOS, add `GoogleService-Info.plist` to your project's root directory.
+    - For Android, add `google-services.json` to your project's `android/app/` directory.
+    - For iOS, add `GoogleService-Info.plist` to your project's `ios/` directory.
 7.  Connect your device or start an emulator.
 8.  Run the app using the following command:<br>
     ```bash
-    flutter run --dart-define-from-file=api_keys.json
+    flutter run
     ```
 
 ## Dependencies

@@ -3,12 +3,13 @@ import "dart:convert";
 
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/foundation.dart";
-import "package:localstore/localstore.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:http/http.dart" as http;
+import "package:localstore/localstore.dart";
 
-import "../utils/member_exception.dart";
-import "../services/notification_service.dart";
 import "../models/trade_notification.dart";
+import "../services/notification_service.dart";
+import "../utils/member_exception.dart";
 
 class Member extends ChangeNotifier {
   final db = Localstore.instance;
@@ -16,8 +17,8 @@ class Member extends ChangeNotifier {
 
   final _baseUrl = "https://api.stripe.com/v1/customers?email=";
   final _headers = {
-    "authorization": "Basic " +
-        base64Encode(utf8.encode(const String.fromEnvironment("STRIPE_API")))
+    "authorization":
+        "Basic " + base64Encode(utf8.encode(dotenv.get("STRIPE_API_KEY")))
   };
 
   bool _isMember = false;
